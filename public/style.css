@@ -1,0 +1,245 @@
+/* Scrollbar styling */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Chat bubbles */
+.chat-bubble {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.user-bubble {
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  color: white;
+  border-radius: 18px 18px 4px 18px;
+  padding: 12px 16px;
+  max-width: 70%;
+  word-wrap: break-word;
+}
+
+.bot-bubble {
+  background: #f1f5f9;
+  color: #1e293b;
+  border-radius: 18px 18px 18px 4px;
+  padding: 12px 16px;
+  max-width: 70%;
+  word-wrap: break-word;
+  border: 1px solid #e2e8f0;
+}
+
+/* Typing animation */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.typing-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #94a3b8;
+  animation: typing 1.4s infinite;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%,
+  60%,
+  100% {
+    opacity: 0.5;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-10px);
+  }
+}
+
+/* Textarea auto-grow */
+textarea {
+  overflow: hidden;
+  resize: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .user-bubble,
+  .bot-bubble {
+    max-width: 85%;
+  }
+
+  body {
+    font-size: 14px;
+  }
+}
+
+/* Shadow effects */
+.shadow-soft {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.shadow-medium {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ================================
+   CHAT ALIGNMENT (RIGHT / LEFT)
+================================ */
+.chat-bubble {
+  display: flex;
+  margin: 8px 0;
+}
+
+/* bubble user kanan */
+.chat-bubble.right {
+  justify-content: flex-end;
+}
+
+/* bubble bot kiri */
+.chat-bubble.left {
+  justify-content: flex-start;
+}
+
+/* batasi lebar bubble */
+.user-bubble,
+.bot-bubble {
+  max-width: 75%;
+  width: fit-content;
+  word-break: break-word;
+}
+
+/* ================================
+   FILE PREVIEW MODERN
+================================ */
+.preview-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #eef2ff;
+  padding: 12px 16px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  border: 1px solid #dbeafe;
+  font-weight: 500;
+}
+
+.preview-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+/* animasi file masuk */
+.preview-box {
+  animation: fadeIn 0.25s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity:0; transform: translateY(5px); }
+  to { opacity:1; transform: translateY(0); }
+}
+
+/* ================================
+   Typing indicator lebih bagus
+================================ */
+.typing-indicator div {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #a1a1aa;
+  animation: blink 1.4s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0.3; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-4px); }
+}
+
+/* PREVIEW FILE CARD */
+.preview-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f5f5f7;
+  padding: 10px 14px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  position: relative;
+  border: 1px solid #dcdcdc;
+}
+
+.preview-box img.preview-img {
+  width: 46px;
+  height: 46px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.remove-btn {
+  margin-left: auto;
+  background: #d9534f;
+  color: white;
+  border: none;
+  padding: 4px 7px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/* BUBBLE FILE */
+.attachment-bubble {
+  max-width: 65%;
+  background: #6a5af9;
+  padding: 10px;
+  color: white;
+  border-radius: 14px;
+}
+
+.doc-bubble,
+.audio-bubble {
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Multi-Input Chatbot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="bg-gradient-to-br from-slate-50 via-white to-slate-50">
+    <div class="flex flex-col h-screen">
+        <!-- Header -->
+        <header class="border-b border-slate-200 bg-white/80 backdrop-blur-sm sticky top-0 z-10">
+            <div class="max-w-6xl mx-auto px-4 py-6">
+                <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    AI Multi-Input Chatbot
+                </h1>
+                <p class="text-slate-600 text-sm mt-1">
+                    Chat with teks, gambar, dokumen, atau audio — output berupa teks.
+                </p>
+            </div>
+        </header>
+
+        <!-- Chat Area -->
+        <main class="flex-1 overflow-hidden flex flex-col">
+            <div id="chatContainer" class="flex-1 overflow-y-auto px-4 py-6 space-y-4 max-w-6xl mx-auto w-full scrollbar-thin">
+                <!-- Initial state - empty chat -->
+                <div id="emptyState" class="flex items-center justify-center h-full">
+                    <div class="text-center">
+                        <div class="text-6xl mb-4 opacity-20">💬</div>
+                        <p class="text-slate-400 text-lg">Mulai percakapan dengan AI Anda</p>
+                        <p class="text-slate-300 text-sm mt-2">Kirim pesan teks, gambar, dokumen, atau audio</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Input Section -->
+        <div class="border-t border-slate-200 bg-white/80 backdrop-blur-sm sticky bottom-0">
+            <div class="max-w-6xl mx-auto px-4 py-6">
+                <!-- File Preview Area -->
+                <div id="previewArea" class="flex gap-3 mb-4 flex-wrap hidden">
+                    <!-- Image Preview -->
+                    <div id="imagePreview" class="relative inline-block hidden">
+                        <img id="imagePreviewImg" src="/placeholder.svg" alt="preview" class="h-16 w-16 object-cover rounded-lg border border-slate-200">
+                        <button onclick="removePreview('image')" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600">✕</button>
+                    </div>
+
+                    <!-- Document Preview -->
+                    <div id="documentPreview" class="relative inline-block hidden">
+                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 max-w-xs">
+                            <p class="text-xs text-slate-600 truncate">📄 <span id="docFileName">document</span></p>
+                        </div>
+                        <button onclick="removePreview('document')" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600">✕</button>
+                    </div>
+
+                    <!-- Audio Preview -->
+                    <div id="audioPreview" class="relative inline-block hidden">
+                        <div class="bg-purple-50 border border-purple-200 rounded-lg p-3 max-w-xs">
+                            <p class="text-xs text-slate-600">🎵 <span id="audioFileName">audio</span></p>
+                            <p class="text-xs text-slate-500 mt-1">Durasi: <span id="audioDuration">--</span>s</p>
+                        </div>
+                        <button onclick="removePreview('audio')" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600">✕</button>
+                    </div>
+                </div>
+
+                <!-- Input Controls -->
+                <div class="flex gap-3 flex-wrap md:flex-nowrap items-end">
+                    <!-- Text Input -->
+                    <div class="flex-1 min-w-0">
+                        <textarea 
+                            id="messageInput" 
+                            placeholder="Ketik pesan Anda..."
+                            class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none bg-white"
+                            rows="1"
+                            style="max-height: 120px;"
+                        ></textarea>
+                    </div>
+
+                    <!-- Upload Buttons -->
+                    <div class="flex gap-2">
+                        <!-- Image Upload -->
+                        <button id="imageBtn" onclick="document.getElementById('imageInput').click()" 
+                            class="p-3 rounded-lg border border-slate-300 hover:bg-slate-50 transition-colors" title="Upload Gambar">
+                            🖼️
+                        </button>
+                        <input id="imageInput" type="file" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
+
+                        <!-- Document Upload -->
+                        <button id="docBtn" onclick="document.getElementById('docInput').click()" 
+                            class="p-3 rounded-lg border border-slate-300 hover:bg-slate-50 transition-colors" title="Upload Dokumen">
+                            📄
+                        </button>
+                        <input id="docInput" type="file" accept=".pdf,.docx,.txt,.doc" class="hidden" onchange="handleDocumentUpload(event)">
+
+                        <!-- Audio Upload -->
+                        <button id="audioBtn" onclick="document.getElementById('audioInput').click()" 
+                            class="p-3 rounded-lg border border-slate-300 hover:bg-slate-50 transition-colors" title="Upload Audio">
+                            🎵
+                        </button>
+                        <input id="audioInput" type="file" accept="audio/mp3,audio/wav,audio/*" class="hidden" onchange="handleAudioUpload(event)">
+
+                        <!-- Send Button -->
+                        <button id="sendBtn" onclick="sendMessage()" 
+                            class="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:shadow-lg transition-all font-semibold whitespace-nowrap">
+                            Kirim
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/script.js"></script>
+</body>
+</html>
